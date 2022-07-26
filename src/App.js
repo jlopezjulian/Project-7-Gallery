@@ -1,53 +1,20 @@
-// // //data fetching in https://teamtreehouse.com/library/fetching-data-with-the-fetch-api
-
-// import React, { Component } from 'react';
-// import apiKey from './config';
-// // import Nav from './Components/Nav';
-// import Photo from './Components/Photo';
-// // import PhotoContainer from './Components/PhotoContainer';
-// // import SearchForm from './Components/SearchForm';
+/**
+ * Treehouse FSJS Degree 2022
+ * React Image Gallery
+ */
 
 
 
-
-
-// class App extends Component {
-//   constructor(){
-//     super(); //lets us use the keyword this inside the constructor within the app class
-//     this.state = {
-//       yorkies: [],
-//     };
-
-// //https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg googled sample of static fliker photo
-
-//   }
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <Photo url = "https://www.allthingsdogs.com/wp-content/uploads/2019/04/Teacup-Yorkie-What-To-Know-Before-Buying-Cover-678x381.jpg"> </Photo>
-//           <Photo url = "https://live.staticflickr.com/65535/52234153999_b1fb0a84c5.jpg"> </Photo>
-//           <Photo> </Photo>
-//           <Photo> </Photo>
-//           <Photo> </Photo>
-
-
-//         </header>
-//       </div>
-//     );
-//   }
-// }
-
-
-// export default App
+/**
+ * Import required dependencies and app components
+ */
 
 import React, { Component } from 'react';
 import './App.css';
-import Results from './Components/Results'
+import Gallery from './Components/Gallery'
 import Nav from './Components/Nav';
 import Search from './Components/SearchForm';
 import config from './config.js';
-import PageNotFound from './Components/PageNotFound';
 import {
   BrowserRouter,
   Route,
@@ -59,6 +26,10 @@ import {
 
 const apiKey = config;
 
+/**
+ * created a constructor in
+ */
+
 class App extends Component {
 
   state = {
@@ -68,6 +39,11 @@ class App extends Component {
     books: []
   }
 
+  /**
+   * componentDidMount is created to manage state
+   * called four constructors to show four different items: dogs at default stage, forest, watercolor, and books
+   */
+
   componentDidMount () {
     this.performSearch();
     this.forestNavItemSearch();
@@ -75,16 +51,24 @@ class App extends Component {
     this.booksNavItemSearch();
   }
 
+/**
+ * Four fetch methods are created for the four items
+ * In each method, I defined a URL to fetch data from the Flickr API, returned in json form
+ * https://www.flickr.com/services/api/explore/flickr.photos.search <-- can customize criteria if needed
+ * Secret API key is written in config.js file which is hidden from public via gitignore
+ *
+ */
+
   performSearch = (tags = "dogs") => {
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
+      .then(response => response.json()) //callback to return in json format
       .then(responseData => {
-        this.setState({
+        this.setState({ //callback to update the state to responseData
             results: responseData.photos.photo,
         })
       })
-      .catch(error => {
-        console.log('Error Fetching & Parsing Data from Flickr', error)
+      .catch(error => { //error function that takes the parameter error
+        console.log('Error Fetching and parsing data', error) //Fetching Data with the Fetch API @6:59
       })
   }
 
@@ -97,7 +81,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error Fetching & Parsing Data from Flickr', error)
+        console.log('Error Fetching', error)
       })
   }
 
@@ -110,7 +94,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error Fetching & Parsing Data from Flickr', error)
+        console.log('Error Fetching', error)
       })
   }
 
@@ -123,7 +107,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error Fetching & Parsing Data from Flickr', error)
+        console.log('Error Fetching', error)
       })
   }
 
@@ -138,13 +122,12 @@ class App extends Component {
 
 
       <Switch>
-        <Route exact path="/" render={() => <Results data={this.state.results}/>}/>
-        <Route path="/forest" render={() => <Results data={this.state.forest}/>}/>
+        <Route exact path="/" render={() => <Gallery data={this.state.results}/>}/>
+        <Route path="/forest" render={() => <Gallery data={this.state.forest}/>}/>
         <Route path="/search" render={() => <Redirect to="/"/>}/>
-        <Route path="/watercolor" render={() => <Results data={this.state.watercolor}/>}/>
-        <Route path="/books" render={() => <Results data={this.state.books}/>}/>
-        <Route path="/:searchQuery" render={({match}) => <Results data={this.state.results}/>}/>
-        <Route component={PageNotFound}/>
+        <Route path="/watercolor" render={() => <Gallery data={this.state.watercolor}/>}/>
+        <Route path="/books" render={() => <Gallery data={this.state.books}/>}/>
+        <Route path="/:searchQuery" render={({match}) => <Gallery data={this.state.results}/>}/>
       </Switch>
       </div>
      </BrowserRouter>
@@ -153,3 +136,10 @@ class App extends Component {
 }
 
 export default App;
+
+
+/**
+ * Sources:
+ * googled sample of static flicker photo: https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg
+ * Fetch v Axios functions: https://teamtreehouse.com/library/fetching-data-with-the-fetch-api#transcript
+ */

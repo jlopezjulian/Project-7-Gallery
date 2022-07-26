@@ -1,15 +1,22 @@
-//A Photo component that displays the li and img elements.
+/**
+ * Purpose: A gallery that displays the li and img elements
+ */
+
+
+/**
+ * imported dependencies
+ */
 
 import React from 'react';
 import Photo from './Photo';
-import PageNotFound from './PageNotFound';
 
-const Results = (props)  => {
 
-    const results = props.data
+const Gallery = (props)  => {
+
+    const Gallery = props.data
     let photos;
-    if(results.length > 0) {
-        photos = results.map(photo =>
+    if(Gallery.length > 0) {
+        photos = Gallery.map(photo =>
             <Photo
                 photoId={photo.id}
                 key={photo.secret}
@@ -19,16 +26,15 @@ const Results = (props)  => {
             />
         )
     } else {
-        photos = <PageNotFound />
     }
 
     return (
-        <div className="photo-container">
-        <h2>Photo</h2>
+        <div className= "photo-container" >
+        <h2>Photo Results</h2>
             <ul>
                 {photos}
             </ul>
         </div>
     )};
 
-export default Results;
+export default Gallery;

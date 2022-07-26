@@ -1,3 +1,12 @@
+/**
+ * purpose: create a search component that prevents refresh of browser
+ */
+
+
+/**
+ * imported dependencies
+ */
+
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 
@@ -7,7 +16,7 @@ class Search extends Component {
         searchText: ''
     }
 
-    searchInputChange = e => {
+    modifiedSearch = e => {
         this.setState({
             searchText: e.target.value
         })
@@ -27,7 +36,7 @@ class Search extends Component {
             <form className="search-form" onSubmit={this.handleSubmit}>
             <input type="search"
                 name="search"
-                onChange= {this.searchInputChange}
+                onChange= {this.modifiedSearch}
                 placeholder="Search"
                 ref={(input) => this.query = input}
                 required
