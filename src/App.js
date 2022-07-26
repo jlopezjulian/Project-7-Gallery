@@ -94,7 +94,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error Fetching', error)
+        console.log('Error Fetching and Parsing Data', error)
       })
   }
 
@@ -107,7 +107,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error Fetching', error)
+        console.log('Error Fetching and Parsing Data', error)
       })
   }
 
