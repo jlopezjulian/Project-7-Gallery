@@ -150,5 +150,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#password protected file
+#password protected
 config.js

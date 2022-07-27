@@ -15,7 +15,7 @@ import './App.css'; //styling
 import Gallery from './Components/Gallery'
 import Nav from './Components/Nav';
 import Search from './Components/SearchForm';
-import config from './config.js'; //added to gitignore file
+import config from './Components/config.js'; //added to gitignore file
 import
 {
   BrowserRouter, //stores the current location in the browser's address  using clean URLs
