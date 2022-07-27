@@ -15,17 +15,17 @@ class Search extends Component {
     state = {
         searchText: ''
     }
-
+//function that changes search state
     modifiedSearch = e => {
         this.setState({
             searchText: e.target.value
         })
     }
-
+//submits the search by declaring the pathway based on user input
     handleSubmit = e => {
         e.preventDefault();
         let searchQueryValue = this.query.value;
-        this.props.onSearch(searchQueryValue);
+        this.props.onSearch(searchQueryValue); //
         let path = `/${searchQueryValue}`;
         this.props.history.push(path);
         e.currentTarget.reset();

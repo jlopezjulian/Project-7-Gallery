@@ -10,13 +10,13 @@
 import React from 'react';
 import Photo from './Photo';
 
-
+//created a component for Gallery and pulled values such as photo id, photo secret, photo title, etc
 const Gallery = (props)  => {
 
-    const Gallery = props.data
+    const results = props.data
     let photos;
     if(Gallery.length > 0) {
-        photos = Gallery.map(photo =>
+        photos = results.map(photo =>
             <Photo
                 photoId={photo.id}
                 key={photo.secret}
@@ -27,7 +27,7 @@ const Gallery = (props)  => {
         )
     } else {
     }
-
+//inserted into the html
     return (
         <div className= "photo-container" >
         <h2>Photo Results</h2>

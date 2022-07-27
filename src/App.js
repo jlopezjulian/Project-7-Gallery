@@ -7,28 +7,27 @@
 
 /**
  * Import required dependencies and app components
+ * import Photo component in the gallery component
  */
 
 import React, { Component } from 'react';
-import './App.css';
+import './App.css'; //styling
 import Gallery from './Components/Gallery'
 import Nav from './Components/Nav';
 import Search from './Components/SearchForm';
-import config from './config.js';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import config from './config.js'; //added to gitignore file
+import
+{
+  BrowserRouter, //stores the current location in the browser's address  using clean URLs
+  Route, //
+  Switch, //renders a route exclusively, used in line 128
+  Redirect //navigates to a new direction
+} from 'react-router-dom'; //template from react
 
 
 
-const apiKey = config;
+const apiKey = config; //pulling from config.js file
 
-/**
- * created a constructor in
- */
 
 class App extends Component {
 
@@ -39,10 +38,10 @@ class App extends Component {
     books: []
   }
 
-  /**
-   * componentDidMount is created to manage state
-   * called four constructors to show four different items: dogs at default stage, forest, watercolor, and books
-   */
+/**
+  * componentDidMount is created to manage state
+  * called four constructors to show four different items: dogs at default stage, forest, watercolor, and books
+ */
 
   componentDidMount () {
     this.performSearch();
@@ -56,6 +55,7 @@ class App extends Component {
  * In each method, I defined a URL to fetch data from the Flickr API, returned in json form
  * https://www.flickr.com/services/api/explore/flickr.photos.search <-- can customize criteria if needed
  * Secret API key is written in config.js file which is hidden from public via gitignore
+ * Links used to find photos based on given tags
  *
  */
 
@@ -64,7 +64,7 @@ class App extends Component {
       .then(response => response.json()) //callback to return in json format
       .then(responseData => {
         this.setState({ //callback to update the state to responseData
-            results: responseData.photos.photo,
+            results: responseData.photos.photo, //pulling from json array
         })
       })
       .catch(error => { //error function that takes the parameter error
@@ -110,6 +110,11 @@ class App extends Component {
         console.log('Error Fetching and Parsing Data', error)
       })
   }
+
+/**
+ * every component here will have this format JSX
+ * routed or created pathways for the header links in the <Switch> tag
+*/
 
   render() {
     return (
